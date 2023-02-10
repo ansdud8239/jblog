@@ -39,17 +39,23 @@ public class BlogRepository {
 		
 	}
 
-	public List<PostVo> findAll(Long categoryNo) {		
-		return sqlSession.selectList("post.findByCategoryNo",categoryNo);
+	public List<PostVo> findAll(String id , Long categoryNo) {		
+		Map<String, Object> map = Map.of("id",id,"c",categoryNo);
+		return sqlSession.selectList("post.findByCategoryNo",map);
 	}
 
-	public PostVo findByCategoryNoAndPostNo(Long categoryNo,Long postNo) {
-		Map<String, Long> map = Map.of("c",categoryNo,"p",postNo);
+	public PostVo findByCategoryNoAndPostNo(String id,Long categoryNo,Long postNo) {
+		Map<String, Object> map = Map.of("id",id,"c",categoryNo,"p",postNo);
 		return sqlSession.selectOne("post.findByCategoryNoAndPostNo",map);
 	}
 
 	public void insert(BlogVo blogVo) {
 		sqlSession.insert("blog.insert",blogVo);
+		
+	}
+
+	public void delete(Long no) {
+		sqlSession.delete("category.delete",no);
 		
 	}
 }

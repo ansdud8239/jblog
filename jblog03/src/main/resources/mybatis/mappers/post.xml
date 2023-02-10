@@ -1,19 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="post">
-	<select id="findByCategoryNo" parameterType="long" resultType="postvo">
-		<![CDATA[
-		select no,title,contents,date_format(reg_date,'%Y/%m/%d') as regDate,category_no 
-		from post
-		where category_no = #{no}
-		]]>
+	<select id="findByCategoryNo" parameterType="map" resultType="postvo">
+		<choose>
+			<when test='c==0l'>
+			<![CDATA[			
+			select a.no,a.title,a.contents,date_format(a.reg_date,'%Y/%m/%d') as regDate,a.category_no 
+			from post a 
+			join category b on a.category_no = b.no 
+        	where b.id=#{id}
+        	order by a.reg_date desc
+        	limit 0,5
+			]]>	
+			</when>
+			<otherwise>
+			<![CDATA[
+			select a.no,a.title,a.contents,date_format(a.reg_date,'%Y/%m/%d') as regDate,a.category_no 
+			from post a 
+			join category b on a.category_no = b.no 
+			where b.id=#{id} and a.category_no =  #{c}
+			order by a.reg_date desc
+			]]>
+			</otherwise>		
+		</choose>
 	</select>
 	<select id="findByCategoryNoAndPostNo" parameterType="map" resultType="postvo">
-		<![CDATA[
-		select no,title,contents,date_format(reg_date,'%Y/%m/%d') as regDate,category_no 
-		from post
-		where no = #{p} and category_no=#{c}
-		]]>
+		<choose>
+			<when test='c==0l and p==0l'>
+			select a.no,a.title,a.contents,date_format(a.reg_date,'%Y/%m/%d') as regDate,a.category_no 
+			from post a 
+			join category b on a.category_no = b.no 
+            where b.id=#{id} 
+            order by reg_date desc limit 0,1
+			</when>
+			<when test='p==0l'>
+			select a.no,a.title,a.contents,date_format(a.reg_date,'%Y/%m/%d') as regDate,a.category_no 
+			from post a 
+			join category b on a.category_no = b.no 
+            where b.id=#{id} and a.category_no =  #{c}
+            order by category_no asc,reg_date asc limit 0,1
+			</when>
+			<otherwise>
+			<![CDATA[		
+			select a.no,a.title,a.contents,date_format(a.reg_date,'%Y/%m/%d') as regDate,a.category_no 
+			from post a 
+			join category b on a.category_no = b.no 
+			where b.id=#{id} and a.category_no =  #{c} and a.no = #{p} 
+			]]>
+			</otherwise>
+		</choose>
 	</select>
 	<insert id="insert" parameterType="postvo">
 		<![CDATA[

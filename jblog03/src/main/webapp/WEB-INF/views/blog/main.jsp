@@ -26,9 +26,16 @@ pageContext.setAttribute("newline", "\n");
 					<p>
 				</div>
 				<ul class="blog-list">
-					<c:forEach items="${map.postlist }" var="vo">
-					<li><a href="${pageContext.request.contextPath}/${id}/${vo.categoryNo}/${vo.no}">${vo.title }</a> <span>${vo.regDate }</span>	</li>
-					</c:forEach>
+					<c:choose>
+						<c:when test="${empty map.postlist }">
+							<p> 게시글이 없습니다.</p>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${map.postlist }" var="vo">
+							<li><a href="${pageContext.request.contextPath}/${id}/${vo.categoryNo}/${vo.no}">${vo.title }</a> <span>${vo.regDate }</span>	</li>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</div>

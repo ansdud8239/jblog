@@ -11,11 +11,23 @@
 	</select>
 
 	<update id="update" parameterType="blogvo">
-		<![CDATA[
-		update blog 
-		set title=#{title },profile=#{profile }
-		where id=#{id }
-		]]>
+		<choose>
+			<when test='profile.equals("")'>
+			<![CDATA[
+			update blog 
+			set title=#{title }
+			where id=#{id }
+			]]>
+			</when>
+			<otherwise>
+			<![CDATA[
+			update blog 
+			set title=#{title },profile=#{profile }
+			where id=#{id }
+			]]>
+			</otherwise>
+		</choose>
+
 	</update>
 	<insert id="insert" parameterType="blogvo">
 		<![CDATA[

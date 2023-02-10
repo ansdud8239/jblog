@@ -31,8 +31,8 @@ public class BlogController {
 	@RequestMapping({ "", "/{pathNo1}", "/{pathNo1}/{pathNo2}" })
 	public String index(@PathVariable("id") String id, @PathVariable("pathNo1") Optional<Long> pathNo1,
 			@PathVariable("pathNo2") Optional<Long> pathNo2,Model model) {
-		Long categoryNo = 1l;
-		Long postNo = 1l;
+		Long categoryNo = 0l;
+		Long postNo = 0l;
 		//System.out.println("--"+pathNo1+":"+pathNo2+"--");
 		if(pathNo2.isPresent()) {
 			categoryNo = pathNo1.get();
@@ -75,6 +75,11 @@ public class BlogController {
 		blogService.addCategory(vo);
 		return "redirect:/"+id+"/admin/category";
 	}
+	@RequestMapping("/admin/category/delete/{no}")
+	public String adminAddCategory(@PathVariable String id,@PathVariable Long no) {
+		blogService.removeCategory(no);
+		return "redirect:/"+id+"/admin/category";
+	}
 
 	@RequestMapping(value="/admin/write", method = RequestMethod.GET)
 	public String adminWrite(@PathVariable String id, Model model) {
@@ -84,7 +89,6 @@ public class BlogController {
 	}
 	@RequestMapping(value="/admin/write", method = RequestMethod.POST)
 	public String adminWrite(@PathVariable String id,PostVo vo) {
-		System.out.println(vo);
 		blogService.addContents(vo);
 		
 		return "redirect:/"+id;

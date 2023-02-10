@@ -29,7 +29,6 @@
 				      			<c:forEach items="${list }" var="category">
 				      				<option value="${category.no }">${category.name }</option>
 				      			</c:forEach>	
-				      				<option>미분류</option>
 				      			</select>
 				      		</td>
 			      		</tr>

@@ -42,11 +42,17 @@ public class BlogService {
 	}
 
 	public Map<Object, Object> getBlogMainPage(String id, Long categoryNo, Long postNo) {
-		List<CategoryVo> categoryList = blogRepository.findAll(id);
-		BlogVo blogVo= blogRepository.findById(id);
+		
 		Map<Object,Object> map = new HashMap<Object, Object>();
-		List<PostVo> postList = blogRepository.findAll(categoryNo);
-		PostVo postVo = blogRepository.findByCategoryNoAndPostNo(categoryNo,postNo);
+		
+		// category list
+		List<CategoryVo> categoryList = blogRepository.findAll(id);
+		// blog 
+		BlogVo blogVo= blogRepository.findById(id);
+		// post List
+		List<PostVo> postList = blogRepository.findAll(id,categoryNo);
+		// Main post
+		PostVo postVo = blogRepository.findByCategoryNoAndPostNo(id,categoryNo,postNo);
 		
 		map.put("list", categoryList);
 		map.put("id",id);
@@ -54,6 +60,11 @@ public class BlogService {
 		map.put("postlist", postList);
 		map.put("postvo", postVo);
 		return map;
+	}
+
+	public void removeCategory(Long no) {
+		blogRepository.delete(no);
+		
 	}
 
 }

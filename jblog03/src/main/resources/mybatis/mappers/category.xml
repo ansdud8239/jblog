@@ -17,7 +17,12 @@
 		insert into category 
 		values(null,#{name},#{description},#{id})
 		]]>
-
 	</insert>
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+		delete from category 
+		where no=#{_parameter}
+		]]>
+	</delete>
 
 </mapper>

@@ -66,6 +66,13 @@
 			<mvc:exclude-mapping path="/asserts/**" />
 			<bean class="com.douzone.jblog.security.AuthInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/user/**" />
+			<mvc:exclude-mapping path="/" />
+			<mvc:exclude-mapping path="/asserts/**" />
+			<bean class=" com.douzone.jblog.interceptor.BlogInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<!-- ViewResolver 설정 -->
@@ -96,7 +103,7 @@
 	</bean>
 
 	<!-- ApplicationContextEventListener -->
-	<!-- <bean class="com.douzone.mysite.event.ApplicationContextEventListener"/> -->
+	<!-- <bean class="com.douzone.jblog.event.ApplicationContextEventListener"/> -->
 
 
 	<context:annotation-config />
