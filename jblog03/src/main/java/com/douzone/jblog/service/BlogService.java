@@ -63,8 +63,11 @@ public class BlogService {
 	}
 
 	public void removeCategory(Long no) {
-		blogRepository.delete(no);
-		
+		blogRepository.deleteCategory(no);		
+	}
+
+	public void removePost(Long categoryNo) {
+		blogRepository.deletePost(categoryNo);
 	}
 
 }

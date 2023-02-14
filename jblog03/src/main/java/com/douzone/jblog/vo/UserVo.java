@@ -2,7 +2,8 @@ package com.douzone.jblog.vo;
 
 import javax.validation.constraints.NotEmpty;
 
-import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,10 +14,11 @@ public class UserVo {
 	@NotEmpty
 	private String id;
 	@NotEmpty
+	@Length(min=2,max=8)
 	private String name;
 	@NotEmpty
 	private String password;
-	@NotEmpty
+
 	private String joinDate;
 	@Override
 	public String toString() {

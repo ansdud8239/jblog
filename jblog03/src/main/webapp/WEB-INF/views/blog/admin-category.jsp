@@ -19,6 +19,7 @@
 					<li class="selected">카테고리</li>
 					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
+				<p style="color: #ff0000; text-align: left; padding: 0;">* 카테고리 삭제 시 해당 카테고리의 게시글 전체가 삭제 됨<p>
 				<table class="admin-cat">
 					<tr>
 						<th>번호</th>

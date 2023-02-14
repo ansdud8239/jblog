@@ -54,8 +54,13 @@ public class BlogRepository {
 		
 	}
 
-	public void delete(Long no) {
+	public void deleteCategory(Long no) {
 		sqlSession.delete("category.delete",no);
+		
+	}
+
+	public void deletePost(Long categoryNo) {
+		sqlSession.delete("post.delete",categoryNo);
 		
 	}
 }

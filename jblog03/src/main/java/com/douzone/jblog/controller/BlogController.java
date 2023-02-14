@@ -77,7 +77,8 @@ public class BlogController {
 	}
 	@RequestMapping("/admin/category/delete/{no}")
 	public String adminAddCategory(@PathVariable String id,@PathVariable Long no) {
-		blogService.removeCategory(no);
+		blogService.removePost(no);
+		blogService.removeCategory(no);		
 		return "redirect:/"+id+"/admin/category";
 	}
 
@@ -90,7 +91,6 @@ public class BlogController {
 	@RequestMapping(value="/admin/write", method = RequestMethod.POST)
 	public String adminWrite(@PathVariable String id,PostVo vo) {
 		blogService.addContents(vo);
-		
-		return "redirect:/"+id;
+		return "redirect:/"+id+"/admin/write";
 	}
 }

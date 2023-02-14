@@ -11,12 +11,22 @@
 <body>
 	<div id="header">
 		<h1>${blogVo.title }</h1>
-		<ul>
-			<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-			<li><a href="${pageContext.request.contextPath}/${blogVo.id }/admin/basic">블로그 관리</a></li>
+		<c:choose>
+			<c:when test="${empty authUser}">
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
+				</ul>
+			</c:when>
+			<c:otherwise>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+					<c:if test="${authUser.id == blogVo.id }">
+						<li><a href="${pageContext.request.contextPath}/${blogVo.id }/admin/basic">블로그 관리</a></li>
+					</c:if>
+				</ul>
+			</c:otherwise>
+		</c:choose>
 
-		</ul>
 	</div>
 </body>
 </html>
