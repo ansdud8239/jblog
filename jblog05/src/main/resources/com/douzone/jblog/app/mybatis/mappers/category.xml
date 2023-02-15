@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="category">
+
+	<select id="findAll" resultType="categoryvo"
+		parameterType="string">	
+		<![CDATA[
+		select a.no,a.name,a.description,a.id, count(b.title) as count from category a
+		left outer join post b on a.no = b.category_no
+		where id=#{_parameter}
+		group by a.no 
+		]]>
+	</select>
+
+	<insert id="insert" parameterType="categoryvo">
+		<![CDATA[
+		insert into category 
+		values(null,#{name},#{description},#{id})
+		]]>
+	</insert>
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+		delete from category 
+		where no=#{_parameter}
+		]]>
+	</delete>
+
+</mapper>

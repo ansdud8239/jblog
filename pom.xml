@@ -4,4 +4,8 @@
   <artifactId>jblog</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <modules>
+  	<module>jblog04</module>
+  	<module>jblog05</module>
+  </modules>
 </project>
