@@ -28,5 +28,9 @@ public class UserService {
 		
 	}
 
+	public boolean idDupChk(String id) {
+		return userRepository.findById(id)==1?true:false;
+	}
+
 
 }

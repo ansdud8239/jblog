@@ -11,6 +11,7 @@ public class UserRepository {
 	
 	@Autowired 
 	private SqlSession sqlSession;
+	
 
 	public void insert(UserVo userVo) {
 		sqlSession.insert("user.insert",userVo);
@@ -20,5 +21,10 @@ public class UserRepository {
 	public UserVo findByIdAndPassword(UserVo userVo) {
 		return sqlSession.selectOne("user.findByIdAndPassword",userVo);
 		
+	}
+
+
+	public int findById(String id) {
+		return sqlSession.selectOne("user.findById",id);
 	}
 }
