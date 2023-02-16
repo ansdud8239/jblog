@@ -21,4 +21,7 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByIdAndPassword",userVo);
 		
 	}
+	public int findById(String id) {
+		return sqlSession.selectOne("user.findById",id);
+	}
 }

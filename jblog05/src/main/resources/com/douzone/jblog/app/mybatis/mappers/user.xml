@@ -10,12 +10,17 @@
 		]]>
 	</insert>
 
-	<select id="findByIdAndPassword"
-		resultType="uservo" parameterType="uservo">	
+	<select id="findByIdAndPassword" resultType="uservo"
+		parameterType="uservo">	
 		<![CDATA[
 		select id,name,password,join_date as joinDate
 		from user 
 		where id=#{id } and password = password(#{password})	
+		]]>
+	</select>
+	<select id="findById" resultType="int" parameterType="string">	
+		<![CDATA[
+		select count(*) from user where id=#{_parameter}
 		]]>
 	</select>
 </mapper>

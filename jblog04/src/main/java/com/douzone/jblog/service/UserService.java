@@ -27,6 +27,8 @@ public class UserService {
 		return userRepository.findByIdAndPassword(userVo);
 		
 	}
-
+	public boolean idDupChk(String id) {
+		return userRepository.findById(id)==1?true:false;
+	}
 
 }
