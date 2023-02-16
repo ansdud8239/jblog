@@ -26,7 +26,7 @@
 			</spring:hasBindErrors>
 			<label class="block-label" for="blog-id">아이디</label>
 			<form:input path="id" />
-			<input id="btn-checkemail" type="button" value="id 중복체크">
+			<input id="btn-checkemail" type="button" value="id 중복체크" onclick="location.href='${pageContext.request.contextPath}/user/idDupChk'">
 			<img id="img-checkemail" style="display: none;" src="${pageContext.request.contextPath}/assets/images/check.png">
 			<p style="color: #ff0000; text-align: left; padding: 0;">
 				<form:errors path="id" />

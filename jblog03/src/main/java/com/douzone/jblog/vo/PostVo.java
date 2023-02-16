@@ -2,12 +2,6 @@ package com.douzone.jblog.vo;
 
 import javax.validation.constraints.NotEmpty;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class PostVo {
 	
 	@NotEmpty
@@ -20,6 +14,57 @@ public class PostVo {
 	private String regDate;	
 	@NotEmpty
 	private Long categoryNo;
+	
+	public Long getNo() {
+		return no;
+	}
+
+
+	public void setNo(Long no) {
+		this.no = no;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public String getContents() {
+		return contents;
+	}
+
+
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
+
+	public Long getCategoryNo() {
+		return categoryNo;
+	}
+
+
+	public void setCategoryNo(Long categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "PostVo [no=" + no + ", title=" + title + ", contents=" + contents + ", regDate=" + regDate
