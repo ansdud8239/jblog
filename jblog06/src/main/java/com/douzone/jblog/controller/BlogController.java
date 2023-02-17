@@ -3,9 +3,6 @@ package com.douzone.jblog.controller;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.regex.Pattern;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.FileuploadService;
-import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
@@ -28,45 +24,22 @@ public class BlogController {
 
 	@Autowired
 	private BlogService blogService;
-	
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private FileuploadService fileuploadService;
 
 	@RequestMapping({ "", "/{pathNo1}", "/{pathNo1}/{pathNo2}" })
-	public String index(@PathVariable("id") String id, @PathVariable("pathNo1") Optional<String> pathNo1,
-			@PathVariable("pathNo2") Optional<String> pathNo2,Model model) {
-
+	public String index(@PathVariable("id") String id, @PathVariable("pathNo1") Optional<Long> pathNo1,
+			@PathVariable("pathNo2") Optional<Long> pathNo2,Model model) {
 		Long categoryNo = 0l;
-		Long postNo = 0l;		
-		String pattern = "^[0-9]*$";
-
+		Long postNo = 0l;
+		//System.out.println("--"+pathNo1+":"+pathNo2+"--");
 		if(pathNo2.isPresent()) {
-			if(Pattern.matches(pattern, pathNo1.get())) {
-				if(Pattern.matches(pattern, pathNo2.get())) {
-					categoryNo =Long.parseLong(pathNo1.get());
-					postNo = Long.parseLong(pathNo2.get());
-				}else {
-					return "/error/500";
-				}
-			}else {
-				return "/error/500";
-			}
-			
+			categoryNo = pathNo1.get();
+			postNo = pathNo2.get();
 		}else if(pathNo1.isPresent()) {
-			if(Pattern.matches(pattern, pathNo1.get())) {
-				categoryNo =Long.parseLong(pathNo1.get());
-			}else {
-				return "/error/500";
-			}		
-		}
-		if(!(userService.idDupChk(id))) {
-			// id 중복체크 
-			// 아이디가 존재하면?
-			// 에러 추가
-			return "/error/404";
+			categoryNo = pathNo1.get();
+		
 		}
 		//System.out.println("--"+categoryNo+":"+postNo+"--");
 		
